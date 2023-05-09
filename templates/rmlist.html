@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<fieldset style = "border-color: #6060cc;" class="fieldset">
+    <a href="{% url 'addroom'%}"><h1 style = "color: #6060cc;"  class="tablink" onclick="openPage('new')" id="defaultOpen">Add Room</h1></a>
+    <div style = "color: #6060cc;" class="tabcontent" id="edit">
+        <table style = "color: #6060cc;" class="table1">
+            <thead>
+            <tr style = "color: #6060cc;" class="table-headers">
+            <th style="background-color:#6060cc;">Room No.</th>
+            <th style="background-color:#6060cc;">Seating Capacity</th>
+            <th style="background-color:#6060cc;" class="empty"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for rm in rooms %}
+            <tr>
+             <td>{{rm.r_number}}</td>
+             <td>{{rm.seating_capacity}}</td>
+             <td class="empty">
+                <form action="{% url 'deleteroom' rm.id %}" method="post">
+                        {% csrf_token %}
+                        <input style="background-color:#6060cc;" type="submit" value="X" class="cross">
+                </form>
+             </td>
+             </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</fieldset>
+
+
+
+
+{% endblock %}

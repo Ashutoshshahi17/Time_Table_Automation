@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<fieldset style="border-color:#6060cc;"class="fieldset">
+    <a href="{% url 'addcourse'%}"><h1 style="color:#6060cc;" class="tablink" onclick="openPage('new')" id="defaultOpen">Add Course</h1></a>
+    <h1 style="color:#6060cc;" class="tablink" onclick="openPage('edit')" id="link_to_edit">Edit Course</h1>
+    <div style="color:#6060cc;"class="tabcontent" id="edit">
+        <table class="table1">
+            <thead>
+            <tr style="background-color:#6060cc;border-style:solid;" class="table-headers">
+            <th style="background-color:#6060cc;">Course Code</th>
+            <th style="background-color:#6060cc;">Course Name</th>
+            <th style="background-color:#6060cc;">Max number of students</th>
+            <th style="background-color:#6060cc;" class="empty"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for crs in courses %}
+            <tr>
+             <td>{{crs.course_number}}</td>
+             <td>{{crs.course_name}}</td>
+             <td>{{crs.max_numb_students}}</td>
+             <td class="empty">
+                <form action="{% url 'deletecourse' crs.course_number %}" method="post">
+                        {% csrf_token %}
+                        <input style="background-color:#6060cc;" type="submit" value="X" class="cross">
+                </form>
+             </td>
+             </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</fieldset>
+
+<div class="img">
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<fieldset style="border-color:#6060cc;" class="fieldset">
+    <a href="{% url 'adddepartment'%}"><h1 style="color:#6060cc;" class="tablink" onclick="openPage('new')" id="defaultOpen">Add Department</h1></a>
+    <div style="color:#6060cc;"class="tabcontent" id="edit">
+        <table style="border-color:#6060cc;" class="table1">
+            <thead>
+            <tr class="table-headers">
+            <th style="background-color:#6060cc;">Department</th>
+            <th style="background-color:#6060cc;" class="empty"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for dept in departments %}
+            <tr>
+             <td>{{dept.dept_name}}</td>
+             <td class="empty">
+                <form action="{% url 'deletedepartment' dept.id %}" method="post">
+                        {% csrf_token %}
+                        <input style="background-color:#6060cc;" type="submit" value="X" class="cross">
+                </form>
+             </td>
+             </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</fieldset>
+
+<div class="img">
+
+</div>
+
+{% endblock %}

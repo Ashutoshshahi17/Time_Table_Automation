@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<fieldset style="border-color:#6060cc;" class="fieldset">
+    <a href="{% url 'addsection'%}"><h1 style="color:#6060cc;" class="tablink" onclick="openPage('new')" id="defaultOpen">Add Section</h1></a>
+    <div style="color:#6060cc;"class="tabcontent" id="edit">
+        <table class="table1">
+            <thead>
+            <tr class="table-headers">
+            <th style="background-color:#6060cc;">Section Id</th>
+            <th style="background-color:#6060cc;">Department</th>
+            <th style="background-color:#6060cc;">Total Classes</th>
+            <th style="background-color:#6060cc;" class="empty"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for sec in sections %}
+            <tr>
+             <td>{{sec.section_id}}</td>
+             <td>{{sec.department}}</td>
+             <td>{{sec.num_class_in_week }}</td>
+             <td class="empty">
+                <form action="{% url 'deletesection' sec.section_id %}" method="post">
+                        {% csrf_token %}
+                        <input style="background-color:#6060cc;" type="submit" value="X" class="cross">
+                </form>
+             </td>
+             </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</fieldset>
+
+<div class="img">
+
+</div>
+
+{% endblock %}

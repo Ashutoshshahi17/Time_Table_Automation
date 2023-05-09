@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<fieldset style = "color: #6060cc; border-color:#6060cc;" class="fieldset">
+    <a href="{% url 'addinstructor'%}"><h1 style = "color: #6060cc;" class="tablink" onclick="openPage('new')" id="defaultOpen">Add Instructor</h1></a>
+    <div style = "color: #6060cc;" class="tabcontent" id="edit">
+        <table style = "color: #6060cc;" class="table1">
+            <thead style = "color: #6060cc;" >
+            <tr style = "color: #6060cc;" class="table-headers">
+            <th style="background-color:#6060cc;">UID</th>
+            <th style="background-color:#6060cc;">Name</th>
+            <th  style="background-color:#6060cc;" class="empty"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for inst in instructors %}
+            <tr>
+             <td>{{inst.uid}}</td>
+             <td>{{inst.name}}</td>
+             <td style = "color: #6060cc;" class="empty">
+                <form action="{% url 'deleteinstructor' inst.id %}" method="post">
+                        {% csrf_token %}
+                        <input style="background-color:#6060cc;" type="submit" value="X" class="cross">
+                </form>
+             </td>
+             </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</fieldset>
+
+<div class="img">
+	<img src="{% static 'img/teacher.png' %}">
+</div>
+
+{% endblock %}
